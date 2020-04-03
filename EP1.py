@@ -66,4 +66,49 @@ while pr:
        else:
            print('\n\n*Verifique os comandos e tente novamente*')
            
-   
+    while Fichas >= 0 and Fase == 'Point':
+        print('\nFase: {0}'.format(Fase))
+        print('Suas fichas: {0}'.format(Fichas))
+        print('Point: {0}'.format(point))
+        if Fichas <= 0:
+            pr = False
+            break        
+        ApostaP = input('\n Que tipo de aposta deseja fazer?\n Pass Line Bet tem {0} fichas apostadas\n -Field(f)\n -Any Craps(ac)\n -Twelve(t)\n Assim que acabar com suas apostas digite "rolar dados"\n Se deseja sair digite "quit"\n Digite sua resposta: '.format(plb_point))
+        if ApostaP == 'f':
+           f_point = int(input('Quantas fichas deseja apostar? '))
+           Fichas -= f_point
+           continue
+        if ApostaP == 'ac':
+           ac_point = int(input('Quantas fichas deseja apostar? '))
+           Fichas -= ac_point
+           continue
+        if ApostaP == 't':
+           t_point = int(input('Quantas fichas deseja apostar? '))
+           Fichas -= t_point
+           continue
+           
+        elif ApostaP == 'rolar dados':
+           rolar_dados()
+           print('\nDado 1: {0}'.format(d1))
+           print('Dado 2: {0}'.format(d2))
+           print('Soma: {0}'.format(d1 + d2))
+           if d1 + d2 == 7:
+               Fase = 'Come out'
+           if d1 + d2 == point:
+               Fichas += 2*plb_point
+               Fase = 'Come out'
+           if d1 + d2 == 3 or 4 or 9 or 10 or 11:
+               Fichas += 2*f_point
+           if d1 + d2 == 2:
+               Fichas += 3*f_point
+           if d1 + d2 == 12:
+               Fichas += 4*f_point
+           if d1 + d2 == 2 or 3 or 12:
+               Fichas += 8*ac_point
+           if d1 + d2 == 12:
+               Fichas += 31*t_point
+           f_point = 0 
+           ac_point = 0
+           t_point = 0
+        else:
+           print('\n\n*Verifique os comandos e tente novamente*')
